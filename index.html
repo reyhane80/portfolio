@@ -1,0 +1,785 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl" id="html-root">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Reyhane Norouzi | Front-End Developer</title>
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --accent: #6c63ff;
+    --accent-light: #f0eeff;
+    --accent-dark: #4a42cc;
+    --teal: #2dbcaa;
+    --teal-light: #e0faf7;
+    --text: #1a1a2e;
+    --text-muted: #666680;
+    --bg: #ffffff;
+    --bg-alt: #f8f9ff;
+    --border: #eeeef8;
+    --radius: 12px;
+    --transition: 0.25s ease;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Vazirmatn', 'Tahoma', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    direction: rtl;
+    line-height: 1.7;
+    font-size: 15px;
+    overflow-x: hidden;
+  }
+
+  body.en {
+    font-family: 'Inter', sans-serif;
+    direction: ltr;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed;
+    top: 0; right: 0; left: 0;
+    background: rgba(255,255,255,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    z-index: 100;
+    padding: 0 5%;
+    height: 64px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .nav-logo {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--accent);
+    text-decoration: none;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    list-style: none;
+  }
+
+  .nav-links a {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--text-muted);
+    text-decoration: none;
+    padding: 6px 12px;
+    border-radius: 8px;
+    transition: var(--transition);
+  }
+
+  .nav-links a:hover { color: var(--accent); background: var(--accent-light); }
+
+  .lang-btn {
+    background: var(--accent);
+    color: white;
+    border: none;
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: var(--transition);
+    font-family: inherit;
+  }
+
+  .lang-btn:hover { background: var(--accent-dark); }
+
+  /* SECTIONS */
+  section { padding: 80px 5%; }
+  section:first-of-type { padding-top: 140px; }
+
+  .container { max-width: 900px; margin: 0 auto; }
+
+  /* HERO */
+  .hero {
+    background: linear-gradient(135deg, #f8f9ff 0%, #f0eeff 50%, #e8fff8 100%);
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    padding-top: 100px;
+  }
+
+  .hero-inner {
+    max-width: 900px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 48px;
+    align-items: center;
+  }
+
+  .hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: var(--accent-light);
+    color: var(--accent);
+    font-size: 12px;
+    font-weight: 600;
+    padding: 5px 12px;
+    border-radius: 20px;
+    margin-bottom: 20px;
+    border: 1px solid rgba(108,99,255,0.15);
+  }
+
+  .hero-badge span { width: 6px; height: 6px; background: var(--teal); border-radius: 50%; display: inline-block; }
+
+  .hero h1 {
+    font-size: clamp(32px, 5vw, 52px);
+    font-weight: 700;
+    line-height: 1.2;
+    margin-bottom: 12px;
+    color: var(--text);
+  }
+
+  .hero h1 em {
+    font-style: normal;
+    color: var(--accent);
+  }
+
+  .hero-sub {
+    font-size: 16px;
+    color: var(--text-muted);
+    margin-bottom: 32px;
+    max-width: 480px;
+    line-height: 1.8;
+  }
+
+  .hero-btns { display: flex; gap: 12px; flex-wrap: wrap; }
+
+  .btn-primary {
+    background: var(--accent);
+    color: white;
+    padding: 12px 24px;
+    border-radius: 10px;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 600;
+    transition: var(--transition);
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .btn-primary:hover { background: var(--accent-dark); transform: translateY(-1px); }
+
+  .btn-secondary {
+    background: white;
+    color: var(--accent);
+    padding: 12px 24px;
+    border-radius: 10px;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 600;
+    border: 1.5px solid var(--accent);
+    transition: var(--transition);
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .btn-secondary:hover { background: var(--accent-light); }
+
+  .hero-avatar {
+    width: 180px;
+    height: 180px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--accent), var(--teal));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 52px;
+    font-weight: 700;
+    color: white;
+    flex-shrink: 0;
+    box-shadow: 0 20px 60px rgba(108,99,255,0.25);
+  }
+
+  /* SECTION TITLE */
+  .sec-label {
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--accent);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+
+  .sec-title {
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: 40px;
+  }
+
+  /* ABOUT */
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    align-items: center;
+  }
+
+  .about-text p {
+    color: var(--text-muted);
+    line-height: 1.9;
+    margin-bottom: 16px;
+    font-size: 14.5px;
+  }
+
+  .about-stats {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+
+  .stat-card {
+    background: var(--bg-alt);
+    border-radius: var(--radius);
+    padding: 20px;
+    text-align: center;
+    border: 1px solid var(--border);
+  }
+
+  .stat-num {
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--accent);
+    display: block;
+  }
+
+  .stat-label {
+    font-size: 12px;
+    color: var(--text-muted);
+    margin-top: 4px;
+  }
+
+  /* SKILLS */
+  .skills-section { background: var(--bg-alt); }
+
+  .skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 16px;
+  }
+
+  .skill-card {
+    background: white;
+    border-radius: var(--radius);
+    padding: 20px;
+    border: 1px solid var(--border);
+    transition: var(--transition);
+  }
+
+  .skill-card:hover { border-color: var(--accent); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(108,99,255,0.1); }
+
+  .skill-icon {
+    font-size: 26px;
+    margin-bottom: 10px;
+    display: block;
+  }
+
+  .skill-name {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text);
+    margin-bottom: 8px;
+  }
+
+  .skill-bar-wrap { height: 4px; background: var(--border); border-radius: 2px; overflow: hidden; }
+  .skill-bar-fill { height: 100%; background: linear-gradient(90deg, var(--accent), var(--teal)); border-radius: 2px; }
+
+  .skill-pct { font-size: 11px; color: var(--text-muted); margin-top: 5px; }
+
+  /* TOOLS */
+  .tools-wrap { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 32px; }
+
+  .tool-tag {
+    background: white;
+    border: 1px solid var(--border);
+    color: var(--text-muted);
+    font-size: 13px;
+    padding: 6px 14px;
+    border-radius: 20px;
+    transition: var(--transition);
+    font-weight: 500;
+  }
+
+  .tool-tag:hover { border-color: var(--accent); color: var(--accent); background: var(--accent-light); }
+
+  /* PROJECTS */
+  .projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+    gap: 24px;
+  }
+
+  .project-card {
+    background: white;
+    border-radius: 16px;
+    border: 1px solid var(--border);
+    overflow: hidden;
+    transition: var(--transition);
+  }
+
+  .project-card:hover { box-shadow: 0 12px 40px rgba(108,99,255,0.12); transform: translateY(-3px); }
+
+  .project-thumb {
+    height: 180px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 48px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .project-thumb.purple { background: linear-gradient(135deg, #f0eeff, #e0d8ff); }
+  .project-thumb.teal { background: linear-gradient(135deg, #e0faf7, #c8f5ef); }
+
+  .project-body { padding: 24px; }
+
+  .project-badges { display: flex; gap: 6px; margin-bottom: 12px; flex-wrap: wrap; }
+
+  .pbadge {
+    font-size: 10px;
+    font-weight: 600;
+    padding: 3px 8px;
+    border-radius: 6px;
+  }
+
+  .pbadge-main { background: var(--accent-light); color: var(--accent); }
+  .pbadge-wip { background: var(--teal-light); color: #1a9084; }
+
+  .project-title {
+    font-size: 17px;
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: 8px;
+  }
+
+  .project-desc {
+    font-size: 13px;
+    color: var(--text-muted);
+    line-height: 1.8;
+    margin-bottom: 16px;
+  }
+
+  .project-techs { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 16px; }
+
+  .ptech {
+    font-size: 11px;
+    background: var(--bg-alt);
+    color: var(--accent);
+    padding: 3px 9px;
+    border-radius: 6px;
+    font-weight: 600;
+    border: 1px solid var(--border);
+  }
+
+  .project-links { display: flex; gap: 10px; }
+
+  .plink {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--accent);
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    padding: 6px 12px;
+    border-radius: 8px;
+    border: 1px solid var(--accent);
+    transition: var(--transition);
+  }
+
+  .plink:hover { background: var(--accent); color: white; }
+
+  /* CONTACT */
+  .contact-section { background: var(--bg-alt); }
+
+  .contact-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    align-items: start;
+  }
+
+  .contact-info p {
+    color: var(--text-muted);
+    font-size: 14.5px;
+    line-height: 1.9;
+    margin-bottom: 28px;
+  }
+
+  .contact-items { display: flex; flex-direction: column; gap: 14px; }
+
+  .contact-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 14px;
+    color: var(--text);
+    text-decoration: none;
+    padding: 12px 16px;
+    background: white;
+    border-radius: 10px;
+    border: 1px solid var(--border);
+    transition: var(--transition);
+  }
+
+  .contact-item:hover { border-color: var(--accent); color: var(--accent); }
+
+  .contact-icon {
+    width: 36px;
+    height: 36px;
+    border-radius: 8px;
+    background: var(--accent-light);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    flex-shrink: 0;
+  }
+
+  .contact-form {
+    background: white;
+    border-radius: 16px;
+    padding: 28px;
+    border: 1px solid var(--border);
+  }
+
+  .form-group { margin-bottom: 16px; }
+
+  .form-group label {
+    display: block;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--text-muted);
+    margin-bottom: 6px;
+  }
+
+  .form-group input,
+  .form-group textarea {
+    width: 100%;
+    padding: 10px 14px;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    font-size: 14px;
+    font-family: inherit;
+    color: var(--text);
+    background: var(--bg-alt);
+    transition: var(--transition);
+    outline: none;
+    resize: vertical;
+  }
+
+  .form-group input:focus,
+  .form-group textarea:focus {
+    border-color: var(--accent);
+    background: white;
+  }
+
+  .form-group textarea { min-height: 100px; }
+
+  .form-submit {
+    width: 100%;
+    background: var(--accent);
+    color: white;
+    border: none;
+    padding: 12px;
+    border-radius: 10px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    font-family: inherit;
+    transition: var(--transition);
+  }
+
+  .form-submit:hover { background: var(--accent-dark); }
+
+  /* FOOTER */
+  footer {
+    text-align: center;
+    padding: 32px 5%;
+    border-top: 1px solid var(--border);
+    font-size: 13px;
+    color: var(--text-muted);
+  }
+
+  /* SCROLL REVEAL */
+  .reveal { opacity: 0; transform: translateY(20px); transition: opacity 0.5s ease, transform 0.5s ease; }
+  .reveal.visible { opacity: 1; transform: none; }
+
+  /* RESPONSIVE */
+  @media (max-width: 700px) {
+    .hero-inner { grid-template-columns: 1fr; text-align: center; }
+    .hero-avatar { width: 120px; height: 120px; font-size: 34px; margin: 0 auto; order: -1; }
+    .hero-btns { justify-content: center; }
+    .about-grid, .contact-grid { grid-template-columns: 1fr; }
+    .projects-grid { grid-template-columns: 1fr; }
+    .nav-links { display: none; }
+  }
+</style>
+</head>
+<body id="body-root">
+
+<!-- NAV -->
+<nav>
+  <a class="nav-logo" href="#">RN</a>
+  <ul class="nav-links">
+    <li><a href="#about" class="t" data-fa="درباره من" data-en="About">درباره من</a></li>
+    <li><a href="#skills" class="t" data-fa="مهارت‌ها" data-en="Skills">مهارت‌ها</a></li>
+    <li><a href="#projects" class="t" data-fa="پروژه‌ها" data-en="Projects">پروژه‌ها</a></li>
+    <li><a href="#contact" class="t" data-fa="تماس" data-en="Contact">تماس</a></li>
+  </ul>
+  <button class="lang-btn" id="langToggle" onclick="toggleLang()">EN</button>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="container">
+    <div class="hero-inner">
+      <div>
+        <div class="hero-badge"><span></span> <span class="t" data-fa="آماده همکاری" data-en="Available for work">آماده همکاری</span></div>
+        <h1><span class="t" data-fa="ریحانه نوروزی" data-en="Reyhane Norouzi">ریحانه نوروزی</span><br><em class="t" data-fa="برنامه‌نویس فرانت‌اند" data-en="Front-End Developer">برنامه‌نویس فرانت‌اند</em></h1>
+        <p class="hero-sub t"
+          data-fa="متخصص در ساخت رابط‌های کاربری زیبا و کارآمد با React.js و Tailwind CSS. سایت‌های فارسی RTL، فروشگاه‌های آنلاین، و پیاده‌سازی دیزاین از روی Figma."
+          data-en="Specializing in beautiful, functional UIs with React.js and Tailwind CSS. Persian RTL sites, e-commerce, and pixel-perfect Figma implementations.">
+          متخصص در ساخت رابط‌های کاربری زیبا و کارآمد با React.js و Tailwind CSS. سایت‌های فارسی RTL، فروشگاه‌های آنلاین، و پیاده‌سازی دیزاین از روی Figma.
+        </p>
+        <div class="hero-btns">
+          <a href="#projects" class="btn-primary t" data-fa="نمونه کارها ↓" data-en="View Projects ↓">نمونه کارها ↓</a>
+          <a href="#contact" class="btn-secondary t" data-fa="تماس با من" data-en="Contact Me">تماس با من</a>
+        </div>
+      </div>
+      <div class="hero-avatar">ر.ن</div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="container">
+    <div class="sec-label t" data-fa="معرفی" data-en="About">معرفی</div>
+    <div class="sec-title t" data-fa="درباره من" data-en="About Me">درباره من</div>
+    <div class="about-grid reveal">
+      <div class="about-text">
+        <p class="t"
+          data-fa="برنامه‌نویس فرانت‌اند با بیش از ۲ سال تجربه یادگیری و پیاده‌سازی پروژه‌های واقعی. فارغ‌التحصیل مهندسی کامپیوتر از دانشگاه آپادانا شیراز."
+          data-en="Front-end developer with 2+ years of hands-on experience building real projects. Computer Engineering graduate from Apadana University, Shiraz.">
+          برنامه‌نویس فرانت‌اند با بیش از ۲ سال تجربه یادگیری و پیاده‌سازی پروژه‌های واقعی. فارغ‌التحصیل مهندسی کامپیوتر از دانشگاه آپادانا شیراز.
+        </p>
+        <p class="t"
+          data-fa="تخصص اصلی من در ساخت سایت‌های فارسی RTL، فروشگاه‌های آنلاین با React و JavaScript، و پیاده‌سازی دقیق طرح‌های Figma است."
+          data-en="My core focus is building Persian RTL sites, React-powered e-commerce stores, and pixel-perfect Figma implementations.">
+          تخصص اصلی من در ساخت سایت‌های فارسی RTL، فروشگاه‌های آنلاین با React و JavaScript، و پیاده‌سازی دقیق طرح‌های Figma است.
+        </p>
+      </div>
+      <div class="about-stats">
+        <div class="stat-card">
+          <span class="stat-num">۲+</span>
+          <div class="stat-label t" data-fa="سال تجربه" data-en="Years Experience">سال تجربه</div>
+        </div>
+        <div class="stat-card">
+          <span class="stat-num">۲۰+</span>
+          <div class="stat-label t" data-fa="صفحه طراحی‌شده" data-en="Pages Designed">صفحه طراحی‌شده</div>
+        </div>
+        <div class="stat-card">
+          <span class="stat-num">RTL</span>
+          <div class="stat-label t" data-fa="متخصص فارسی" data-en="Persian Expert">متخصص فارسی</div>
+        </div>
+        <div class="stat-card">
+          <span class="stat-num">۱۰۰%</span>
+          <div class="stat-label t" data-fa="ریسپانسیو" data-en="Responsive">ریسپانسیو</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills" class="skills-section">
+  <div class="container">
+    <div class="sec-label t" data-fa="توانایی‌ها" data-en="Expertise">توانایی‌ها</div>
+    <div class="sec-title t" data-fa="مهارت‌ها" data-en="Skills">مهارت‌ها</div>
+    <div class="skills-grid reveal">
+      <div class="skill-card">
+        <span class="skill-icon">🌐</span>
+        <div class="skill-name">HTML5 / CSS3</div>
+        <div class="skill-bar-wrap"><div class="skill-bar-fill" style="width:90%"></div></div>
+        <div class="skill-pct">90%</div>
+      </div>
+      <div class="skill-card">
+        <span class="skill-icon">⚡</span>
+        <div class="skill-name">JavaScript (ES6+)</div>
+        <div class="skill-bar-wrap"><div class="skill-bar-fill" style="width:80%"></div></div>
+        <div class="skill-pct">80%</div>
+      </div>
+      <div class="skill-card">
+        <span class="skill-icon">⚛️</span>
+        <div class="skill-name">React.js</div>
+        <div class="skill-bar-wrap"><div class="skill-bar-fill" style="width:75%"></div></div>
+        <div class="skill-pct">75%</div>
+      </div>
+      <div class="skill-card">
+        <span class="skill-icon">🎨</span>
+        <div class="skill-name">Tailwind CSS</div>
+        <div class="skill-bar-wrap"><div class="skill-bar-fill" style="width:85%"></div></div>
+        <div class="skill-pct">85%</div>
+      </div>
+      <div class="skill-card">
+        <span class="skill-icon">🔧</span>
+        <div class="skill-name">Git / GitHub</div>
+        <div class="skill-bar-wrap"><div class="skill-bar-fill" style="width:75%"></div></div>
+        <div class="skill-pct">75%</div>
+      </div>
+      <div class="skill-card">
+        <span class="skill-icon">🔌</span>
+        <div class="skill-name">WordPress</div>
+        <div class="skill-bar-wrap"><div class="skill-bar-fill" style="width:65%"></div></div>
+        <div class="skill-pct">65%</div>
+      </div>
+    </div>
+    <div class="tools-wrap reveal">
+      <span class="tool-tag">Vite</span>
+      <span class="tool-tag">React Router</span>
+      <span class="tool-tag">Context API</span>
+      <span class="tool-tag">Figma</span>
+      <span class="tool-tag">REST API</span>
+      <span class="tool-tag">localStorage</span>
+      <span class="tool-tag">Font Awesome</span>
+      <span class="tool-tag">VS Code</span>
+      <span class="tool-tag">Responsive Design</span>
+      <span class="tool-tag">RTL / Persian</span>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="container">
+    <div class="sec-label t" data-fa="کارهایم" data-en="My Work">کارهایم</div>
+    <div class="sec-title t" data-fa="نمونه پروژه‌ها" data-en="Projects">نمونه پروژه‌ها</div>
+    <div class="projects-grid">
+      <div class="project-card reveal">
+        <div class="project-thumb purple">🛍️</div>
+        <div class="project-body">
+          <div class="project-badges">
+            <span class="pbadge pbadge-main t" data-fa="پروژه اصلی" data-en="Main Project">پروژه اصلی</span>
+          </div>
+          <div class="project-title t" data-fa="گالری رها — فروشگاه مد و پوشاک" data-en="Raha Gallery — Fashion Store">گالری رها — فروشگاه مد و پوشاک</div>
+          <p class="project-desc t"
+            data-fa="سایت فروشگاهی ۲۰ صفحه‌ای فارسی با سبد خرید کامل، جستجوی موبایل، و پیاده‌سازی RTL. ساخته شده با HTML، Tailwind CSS و JavaScript."
+            data-en="A 20-page Persian fashion e-commerce site with full cart functionality, mobile search, and complete RTL implementation. Built with
+
+<!-- CONTACT -->
+<section id="contact" class="contact-section">
+  <div class="container">
+    <div class="sec-label t" data-fa="ارتباط" data-en="Get in Touch">ارتباط</div>
+    <div class="sec-title t" data-fa="تماس با من" data-en="Contact Me">تماس با من</div>
+    <div class="contact-grid reveal">
+      <div class="contact-info">
+        <p class="t"
+          data-fa="اگه پروژه‌ای دارید یا می‌خواید همکاری کنیم، خوشحال میشم پیام بدید. سریع جواب می‌دم!"
+          data-en="Have a project in mind or want to collaborate? I'd love to hear from you. I respond quickly!">
+          اگه پروژه‌ای دارید یا می‌خواید همکاری کنیم، خوشحال میشم پیام بدید. سریع جواب می‌دم!
+        </p>
+        <div class="contact-items">
+          <a href="tel:+989028060789" class="contact-item">
+            <div class="contact-icon">📱</div>
+            <span>۰۹۰۲۸۰۶۰۷۸۹</span>
+          </a>
+          <a href="mailto:nouroozireyhoon@gmail.com" class="contact-item">
+            <div class="contact-icon">✉️</div>
+            <span>nouroozireyhoon@gmail.com</span>
+          </a>
+          <a href="https://github.com/reyhane80" target="_blank" class="contact-item">
+            <div class="contact-icon">🔗</div>
+            <span>github.com/reyhane80</span>
+          </a>
+          <a href="https://reyhane80.github.io/project" target="_blank" class="contact-item">
+            <div class="contact-icon">🌐</div>
+            <span>reyhane80.github.io/project</span>
+          </a>
+        </div>
+      </div>
+      <div class="contact-form">
+        <div class="form-group">
+          <label class="t" data-fa="نام شما" data-en="Your Name">نام شما</label>
+          <input type="text" class="t" data-fa-placeholder="مثلاً: علی احمدی" data-en-placeholder="e.g. John Doe" placeholder="مثلاً: علی احمدی">
+        </div>
+        <div class="form-group">
+          <label class="t" data-fa="ایمیل" data-en="Email">ایمیل</label>
+          <input type="email" placeholder="email@example.com">
+        </div>
+        <div class="form-group">
+          <label class="t" data-fa="پیام" data-en="Message">پیام</label>
+          <textarea class="t" data-fa-placeholder="درباره پروژه‌تون بنویسید..." data-en-placeholder="Tell me about your project..." placeholder="درباره پروژه‌تون بنویسید..."></textarea>
+        </div>
+        <button class="form-submit t" data-fa="ارسال پیام ✉️" data-en="Send Message ✉️">ارسال پیام ✉️</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p class="t"
+    data-fa="ساخته شده با ❤️ توسط ریحانه نوروزی — Front-End Developer"
+    data-en="Made with ❤️ by Reyhane Norouzi — Front-End Developer">
+    ساخته شده با ❤️ توسط ریحانه نوروزی — Front-End Developer
+  </p>
+</footer>
+
+<script>
+  let isEn = false;
+
+  function toggleLang() {
+    isEn = !isEn;
+    const root = document.getElementById('html-root');
+    const body = document.getElementById('body-root');
+    const btn = document.getElementById('langToggle');
+
+    root.setAttribute('lang', isEn ? 'en' : 'fa');
+    root.setAttribute('dir', isEn ? 'ltr' : 'rtl');
+    body.className = isEn ? 'en' : '';
+    btn.textContent = isEn ? 'فا' : 'EN';
+
+    document.querySelectorAll('.t').forEach(el => {
+      const key = isEn ? 'en' : 'fa';
+      if (el.dataset[key]) el.textContent = el.dataset[key];
+      const ph = el.dataset[key + 'Placeholder'];
+      if (ph) el.placeholder = ph;
+    });
+
+    const avatar = document.querySelector('.hero-avatar');
+    avatar.textContent = isEn ? 'RN' : 'ر.ن';
+  }
+
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', e => {
+      e.preventDefault();
+      const target = document.querySelector(a.getAttribute('href'));
+      if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+  });
+</script>
+</body>
+</html>
