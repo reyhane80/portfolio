@@ -512,6 +512,11 @@
   }
 
   .form-submit:hover { background: var(--accent-dark); }
+  .form-submit:disabled { opacity: 0.6; cursor: wait; }
+
+  .form-status { margin-top: 12px; font-size: 13px; text-align: center; min-height: 20px; }
+  .form-status.success { color: #1a9084; }
+  .form-status.error { color: #d63384; }
 
   /* FOOTER */
   footer {
@@ -852,21 +857,25 @@
           </a>
         </div>
       </div>
-      <div class="contact-form">
+      <form class="contact-form" id="contactForm" action="https://formspree.io/f/xkjoaeda" method="POST">
+        <input type="hidden" name="_subject" value="پیام جدید از پورتفولیو">
+        <!-- فیلد مخفی برای جلوگیری از اسپم ربات‌ها -->
+        <input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off">
         <div class="form-group">
-          <label class="t" data-fa="نام شما" data-en="Your Name">نام شما</label>
-          <input type="text" class="t" data-fa-placeholder="مثلاً: علی احمدی" data-en-placeholder="e.g. John Doe" placeholder="مثلاً: علی احمدی">
+          <label for="cf-name" class="t" data-fa="نام شما" data-en="Your Name">نام شما</label>
+          <input id="cf-name" name="name" type="text" required maxlength="80" class="t" data-fa-placeholder="مثلاً: علی احمدی" data-en-placeholder="e.g. John Doe" placeholder="مثلاً: علی احمدی">
         </div>
         <div class="form-group">
-          <label class="t" data-fa="ایمیل" data-en="Email">ایمیل</label>
-          <input type="email" placeholder="email@example.com">
+          <label for="cf-email" class="t" data-fa="ایمیل" data-en="Email">ایمیل</label>
+          <input id="cf-email" name="email" type="email" required dir="ltr" placeholder="email@example.com">
         </div>
         <div class="form-group">
-          <label class="t" data-fa="پیام" data-en="Message">پیام</label>
-          <textarea class="t" data-fa-placeholder="درباره پروژه‌تون بنویسید..." data-en-placeholder="Tell me about your project..." placeholder="درباره پروژه‌تون بنویسید..."></textarea>
+          <label for="cf-message" class="t" data-fa="پیام" data-en="Message">پیام</label>
+          <textarea id="cf-message" name="message" required minlength="10" maxlength="3000" class="t" data-fa-placeholder="درباره پروژه‌تون بنویسید..." data-en-placeholder="Tell me about your project..." placeholder="درباره پروژه‌تون بنویسید..."></textarea>
         </div>
-        <button class="form-submit t" data-fa="ارسال پیام ✉️" data-en="Send Message ✉️">ارسال پیام ✉️</button>
-      </div>
+        <button type="submit" class="form-submit t" data-fa="ارسال پیام ✉️" data-en="Send Message ✉️">ارسال پیام ✉️</button>
+        <p class="form-status" id="formStatus" role="status" aria-live="polite"></p>
+      </form>
     </div>
   </div>
 </section>
@@ -917,6 +926,40 @@
       const target = document.querySelector(a.getAttribute('href'));
       if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
     });
+  });
+  // ارسال فرم تماس به Formspree بدون رفرش صفحه
+  const contactForm = document.getElementById('contactForm');
+  const formStatus = document.getElementById('formStatus');
+  const formMessages = {
+    sending: { fa: 'در حال ارسال...', en: 'Sending...' },
+    success: { fa: 'پیام شما ارسال شد. ممنون! به‌زودی جواب می‌دم.', en: 'Message sent. Thank you! I\'ll get back to you soon.' },
+    error: { fa: 'ارسال پیام ناموفق بود. لطفاً دوباره تلاش کنید یا مستقیم ایمیل بزنید.', en: 'Something went wrong. Please try again or email me directly.' },
+  };
+
+  function showStatus(type) {
+    formStatus.className = 'form-status' + (type === 'sending' ? '' : ' ' + type);
+    formStatus.textContent = formMessages[type][isEn ? 'en' : 'fa'];
+  }
+
+  contactForm.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const button = contactForm.querySelector('.form-submit');
+    button.disabled = true;
+    showStatus('sending');
+    try {
+      const res = await fetch(contactForm.action, {
+        method: 'POST',
+        body: new FormData(contactForm),
+        headers: { Accept: 'application/json' },
+      });
+      if (!res.ok) throw new Error('Request failed');
+      contactForm.reset();
+      showStatus('success');
+    } catch {
+      showStatus('error');
+    } finally {
+      button.disabled = false;
+    }
   });
 </script>
 </body>
