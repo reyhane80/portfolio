@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="./favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>پنل مدیریت ریری</title>
+    <script>
+      // اعمال تم پیش از بارگذاری Vue تا صفحه چشمک نزند
+      try {
+        const saved = localStorage.getItem('dashboard:theme')
+        const dark = saved ? saved === 'dark' : matchMedia('(prefers-color-scheme: dark)').matches
+        document.documentElement.classList.toggle('dark', dark)
+      } catch {}
+    </script>
+    <script type="module" crossorigin src="./assets/index-CJVud5tB.js"></script>
+    <link rel="modulepreload" crossorigin href="./assets/runtime-core.esm-bundler-BYHf9Ypu.js">
+    <link rel="stylesheet" crossorigin href="./assets/index-B-9kzT_x.css">
+  </head>
+  <body>
+    <div id="app"></div>
+  </body>
+</html>
